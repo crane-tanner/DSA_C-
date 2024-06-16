@@ -121,6 +121,44 @@ public:
 
         length++; // increment length of LL
     }
+    
+    void deleteFirst() {
+        if (length == 0) return;
+        Node* temp = head; 
+        if (length == 1) {
+            head = nullptr;
+            tail = nullptr;
+        }
+        else {
+            head = head->next;
+        }
+        delete temp; 
+        length--;
+    }
+
+    Node* get(int index) {
+        if (index < 0 || index >= length) {
+            return nullptr;
+        }
+        Node* temp = head;
+        for (int i = 0; i < index; i++) {
+            temp = temp->next;
+
+        }
+        return temp;
+    }
+
+    bool set(int index, int value) {
+        Node* temp = get(index);
+        if (temp) {
+            temp->value = value; 
+            return true;
+        }
+        return false;
+    }
+
+
+
 };
 
 
@@ -137,24 +175,16 @@ int main() {
 
     myLinkedList->append(5);
     myLinkedList->prepend(3);
-    myLinkedList->deleteLast();
-
+    myLinkedList->prepend(2);
+    myLinkedList->append(6);
+    myLinkedList->set(1, 23);
+    //myLinkedList->deleteLast();
+    //myLinkedList->deleteFirst();
     cout << "\nLinked List:\n";
     myLinkedList->printList();
 
+    //cout << myLinkedList->get(1)->value;
    
-    /*
-        EXPECTED OUTPUT:
-        ----------------
-        Head: 4
-        Tail: 4
-        Length: 1
-
-        Linked List:
-        3
-        4
-        5
-    */
 
 }
 
