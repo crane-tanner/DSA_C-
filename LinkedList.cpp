@@ -105,6 +105,22 @@ public:
         length--;
     }
 
+    void prepend(int value) {
+        Node* newNode = new Node(value); // create a new node with the passed in value
+
+        if (length == 0) { // if LL is empty then head and tail point to newNode
+            head = newNode;
+            tail = newNode; 
+        }
+        else { // otherwise newNode next pointer to head then head point (move over) to newNode
+
+            newNode->next = head;
+            head = newNode;
+        
+        }
+
+        length++; // increment length of LL
+    }
 };
 
 
@@ -113,10 +129,14 @@ int main() {
 
     LinkedList* myLinkedList = new LinkedList(4);
 
+    /*
     myLinkedList->getHead();
     myLinkedList->getTail();
     myLinkedList->getLength();
+    */
+
     myLinkedList->append(5);
+    myLinkedList->prepend(3);
     myLinkedList->deleteLast();
 
     cout << "\nLinked List:\n";
@@ -131,8 +151,9 @@ int main() {
         Length: 1
 
         Linked List:
+        3
         4
-
+        5
     */
 
 }
