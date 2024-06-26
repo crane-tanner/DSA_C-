@@ -157,6 +157,38 @@ public:
         return false;
     }
 
+    bool insert(int index, int value)
+    {
+        if (index < 0 || index > length) return false; // if index is out of range
+        if (index == 0) { // if index is at first node
+            prepend(value);
+            return true;
+        }
+        if (index == length) // if index is at the last node 
+        {
+            append(value);
+            return true;
+        }
+        Node* newNode = new Node(value); // create a new node with provided value and store in newNode pointer
+        Node* temp = get(index - 1); // get the index at the node before we want to insert and set in temp pointer
+        newNode->next = temp->next; // set the next pointer of newNode to next pointer of the node pointed to by temp pointer
+        temp->next = newNode; // set next pointer of the node pointed to by the temp pointer to newNode
+        length++;
+        return true; // operation was successful 
+    }
+    void deleteNode(int index) {
+        if (index < 0 || length > 0) return; 
+        if (index == 0) return deleteFirst();
+        if (index == length - 1) return deleteLast(); 
+        Node* prev = get(index - 1);
+        Node* temp = prev->next;
+        prev->next = temp->next;
+        delete temp;
+        length--;
+    }
+
+
+
 
 
 };
@@ -164,25 +196,33 @@ public:
 
 
 int main() {
-
-    LinkedList* myLinkedList = new LinkedList(4);
+    LinkedList* myLinkedList = new LinkedList(1);
+    myLinkedList->append(2);
+    myLinkedList->append(3);
+    myLinkedList->append(4);
+    myLinkedList->append(5);
 
     /*
     myLinkedList->getHead();
     myLinkedList->getTail();
     myLinkedList->getLength();
     */
-
+    /*
     myLinkedList->append(5);
     myLinkedList->prepend(3);
     myLinkedList->prepend(2);
     myLinkedList->append(6);
     myLinkedList->set(1, 23);
+    */
     //myLinkedList->deleteLast();
     //myLinkedList->deleteFirst();
+
     cout << "\nLinked List:\n";
     myLinkedList->printList();
 
+    myLinkedList->deleteNode(0);
+    cout << "Linked List after deletion:\n";
+    myLinkedList->printList();
     //cout << myLinkedList->get(1)->value;
    
 
