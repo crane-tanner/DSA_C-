@@ -1,19 +1,23 @@
 #include <iostream>
 
 using namespace std;
-            // O(n^2) --> Quadratic time. Not efficient. 
+            // average and worst case O(n^2) --> Quadratic time. Not efficient. 
 
-void bubbleSort(int array[], int size) {
-    for (int i = size - 1; i > 0; i--) {
-        for (int j = 0; j < i;j++) {
-            if (array[j] > array[j + 1]) { //if the jth element of array is greater than the next element
-                int temp = array[j]; // store position j of array in temp variable
-                array[j] = array[j + 1]; // set the next element into position of j of array
-                array[j + 1] = temp; // set temp into postion of the next element 
+void bubbleSort(int a[], int size) {
+    for (int i = size - 1; i > 0; i--)
+    {
+        for (int j = 0; j < i; j++)
+        {
+            if (a[j] > a[j + 1])
+            {
+                int temp = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = temp;
             }
         }
     }
 }
+
 
 
 
@@ -34,7 +38,7 @@ int main() {
     /*
         EXPECTED OUTPUT:
         ----------------
-        1 2 3 4 5 6
+        1 2 3 4 5 6 7 8 9
 
      */
 
