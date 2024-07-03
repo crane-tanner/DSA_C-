@@ -1,1 +1,1 @@
-C++ Data Structures & Algorithms + LEETCODE Exercises on Udemy.
+C++ Data Structures & Algorithms + LEETCODE Exercises on Udemy. (Instructor: Scott Barrett) 
