@@ -72,32 +72,80 @@ public:
         cout << "Length: " << length << endl;
     }
 
+    void append(int value) {
+        Node* newNode = new Node(value); // pass in value to append and create a new node 
+        if (length == 0) {
+            head = newNode; // if no other node exists head and tail point to newNode
+            tail = newNode;
+        }
+        else {
+            tail->next = newNode; // next pointer of tail pts to newNode
+            newNode->prev = tail; //prev pointer of newNode points to tail
+            tail = newNode; // newNode is set as the tail
+        }
+        length++;
+    }
+
+    void deleteLast() {
+        if (length == 0) return;
+        Node* temp = tail; 
+        if (length == 1) {
+            head = nullptr;
+            tail = nullptr;
+        }
+        else {
+            tail = tail->prev;
+            tail->next = nullptr; 
+        }
+        delete temp; 
+        length--;
+    }
+    void prepend(int value) {
+        Node* newNode = new Node(value); 
+        if (length == 0) {
+            head = newNode; 
+            tail = newNode; 
+        }
+        else {
+            newNode->next = head; 
+            head->prev = newNode; 
+            head = newNode; 
+        }
+        length++;
+    }
+
+    void deleteFirst() {
+        if (length == 0) return; 
+        Node* temp = head; 
+        if (length == 1) {
+            head = nullptr; 
+            tail = nullptr;
+        }
+        else {
+            head = head->next; 
+            head->prev = nullptr; 
+        }
+        delete temp; 
+        length--; 
+    }
+
+
+
+
 };
 
 
 
 int main() {
 
-    DoublyLinkedList* myDLL = new DoublyLinkedList(7);
-
+    DoublyLinkedList* myDLL = new DoublyLinkedList(1);
+    myDLL->append(2);
+    myDLL->append(3);
     myDLL->getHead();
     myDLL->getTail();
     myDLL->getLength();
-
+    myDLL->deleteFirst();
     cout << "\nDoubly Linked List:\n";
     myDLL->printList();
-
-    /*
-        EXPECTED OUTPUT:
-        ----------------
-        Head: 7
-        Tail: 7
-        Length: 1
-
-        Doubly Linked List:
-        7
-
-    */
-
 }
 
