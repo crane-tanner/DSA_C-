@@ -113,7 +113,6 @@ public:
         }
         length++;
     }
-
     void deleteFirst() {
         if (length == 0) return; 
         Node* temp = head; 
@@ -129,8 +128,72 @@ public:
         length--; 
     }
 
+    Node* get(int index) {
+        if (index < 0 || index >= length)
+        {
+            return nullptr; 
+        }
+        Node* temp = head; 
+        if (index < length/2) {
+            for (int i = 0; i < index; i++) {
+                temp = temp->next;
+            }
+        }
+        else {
+            temp = tail; 
+            for (int i = length - 1; i > index; i--) {
+                temp = temp->prev; 
 
+            }
+        }
+        return temp; 
+     }
+    bool set(int index, int value) {
+        Node* temp = get(index);
+        if (temp) {
+            temp->value = value;
+            return true;
+        }
+        return false; 
+    }
+    bool insert(int index, int value) {
+        if (index < 0 || index > length) return false; 
+        if (index == 0)
+        {
+            prepend(value);
+            return true;
+        }
+        if (index == length) {
+            append(value);
+            return true;
+        }
 
+        Node* newNode = new Node(value);
+        Node* before = get(index - 1);
+        Node* after = before->next;
+
+        newNode->prev = before; //pointer redirection to insert in middle of DLL
+        newNode->next = after; 
+        before->next = newNode;
+        after->prev = newNode;
+        length++; 
+        return true;
+    }
+    void deleteNode(int index)
+    { 
+        if (index < 0 || index >= length) return;
+        if (index == 0) {
+            return deleteFirst();
+        }
+        if (index == length-1) {
+            return deleteLast();
+        }
+        Node* temp = get(index);
+        temp->next->prev = temp->prev;
+        temp->prev->next = temp->next;
+        delete temp;
+        length--;
+    }
 
 };
 
@@ -138,14 +201,19 @@ public:
 
 int main() {
 
-    DoublyLinkedList* myDLL = new DoublyLinkedList(1);
-    myDLL->append(2);
+    DoublyLinkedList* myDLL = new DoublyLinkedList(11);
     myDLL->append(3);
-    myDLL->getHead();
-    myDLL->getTail();
-    myDLL->getLength();
-    myDLL->deleteFirst();
+    myDLL->append(23);
+    myDLL->append(7);
+    //myDLL->getHead();
+    //myDLL->getTail();
+    //myDLL->getLength();
     cout << "\nDoubly Linked List:\n";
     myDLL->printList();
+    cout << "\n";
+    myDLL->deleteNode(3);
+    //myDLL->insert(4, 0);
+    myDLL->printList();
+
 }
 
